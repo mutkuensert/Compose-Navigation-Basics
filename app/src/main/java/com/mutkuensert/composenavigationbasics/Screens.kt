@@ -15,8 +15,12 @@ import androidx.navigation.NavController
 
 @Composable
 fun FirstScreen(navController: NavController){
-    Column(modifier = Modifier.fillMaxSize()){
-        Button(onClick = { /*TODO*/ }) {
+    MyColumn{
+        Text(text = "First Screen")
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        Button(onClick = { navController.navigate("SecondScreen") }) {
             Text(text = "To second screen")
         }
     }
@@ -24,17 +28,12 @@ fun FirstScreen(navController: NavController){
 
 @Composable
 fun SecondScreen(navController: NavController){
-    val (text, setText) = remember {mutableStateOf("Text")}
+    MyColumn{
+        Text(text = "Second Screen")
 
-    Column(modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally){
-
-        OutlinedTextField(value = text, onValueChange = setText)
-        
         Spacer(modifier = Modifier.height(15.dp))
 
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = { navController.navigate("ThirdScreen"){popUpTo("FirstScreen")} }) {
             Text(text = "To third screen")
         }
     }
@@ -42,12 +41,12 @@ fun SecondScreen(navController: NavController){
 
 @Composable
 fun ThirdScreen(navController: NavController){
-    Column(modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally){
-        Text(text = "Text")
+    MyColumn{
+        Text(text = "Third Screen")
 
-        Button(onClick = { /*TODO*/ }) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        Button(onClick = { navController.navigate("FirstScreen") }) {
             Text(text = "To first screen")
         }
     }
